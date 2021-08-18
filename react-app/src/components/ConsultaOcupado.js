@@ -8,15 +8,22 @@ class HttpRequests extends Component {
       espaciosOcupados: [],
     };
   }
-
   espaciosOcupados() {
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .get("http://localhost:8080/spaces")
       .then((response) => {
+        
         let data = response.data;
+        let _espaciosOcupados = []
+        for (let espacio of data) {
+          if (espacio.state === 'taken'){
+            _espaciosOcupados.push(espacio);
+          }
+        }
 
-        this.setState({ espaciosOcupados: data });
+        this.setState({ espaciosOcupados: _espaciosOcupados });
         console.log(this.state.espaciosOcupados);
+       
       })
       .catch((error) => console.log(error));
   }
@@ -32,7 +39,8 @@ class HttpRequests extends Component {
           <div>
             {espaciosOcupados.length
               ? espaciosOcupados.map((espacio) => (
-                  <div key={espacio.id}>{espacio.title}</div>
+                
+                <div key={espacio.id}>El espacio {espacio.id} está ocupado</div>
                 ))
               : null}
           </div>

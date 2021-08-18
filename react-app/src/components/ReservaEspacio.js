@@ -16,7 +16,7 @@ class HttpRequests extends Component {
   submitHandlerReservar = (e) => {
     e.preventDefault();
     axios
-      .post("https://jsonplaceholder.typicode.com/posts", this.state.placa)
+      .post("http://localhost:8080/reservations/" + this.state.placa)
       .then((response) => {
         console.log(response);
       })

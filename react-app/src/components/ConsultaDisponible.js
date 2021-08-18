@@ -11,11 +11,17 @@ class ConsultaDisponible extends Component {
 
   espaciosDisponibles() {
     axios
-      .get("https://jsonplaceholder.typicode.com/posts")
+      .get("http://localhost:8080/spaces")
       .then((response) => {
         let data = response.data;
+        let _espaciosDisponibles = []
+        for (let espacio of data) {
+          if (espacio.state === 'free'){
+            _espaciosDisponibles.push(espacio);
+          }
+        }
 
-        this.setState({ espaciosDisponibles: data });
+        this.setState({ espaciosDisponibles: _espaciosDisponibles });
         console.log(this.state.espaciosDisponibles);
       })
       .catch((error) => console.log(error));
@@ -32,7 +38,7 @@ class ConsultaDisponible extends Component {
           <div>
             {espaciosDisponibles.length
               ? espaciosDisponibles.map((espacio) => (
-                  <div key={espacio.id}>{espacio.title}</div>
+                  <div key={espacio.id}>El espacio {espacio.id} está disponible</div>
                 ))
               : null}
           </div>

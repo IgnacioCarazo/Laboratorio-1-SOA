@@ -16,7 +16,7 @@ class HttpRequests extends Component {
   submitHandlerLiberar = (e) => {
     e.preventDefault();
     axios
-      .post("https://jsonplaceholder.typicode.com/posts", this.state.espacioID)
+      .delete("http://localhost:8080/spaces/" + this.state.espacioID)
       .then((response) => {
         console.log(response);
       })
